@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Примеры - MTS Live Widget</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f8f9fa;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    nav {
+      background: white;
+      padding: 1rem 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #666;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      background: #667eea;
+      color: white;
+    }
+
+    .nav-links a.active {
+      background: #667eea;
+      color: white;
+    }
+
+    main {
+      padding: 3rem 0;
+    }
+
+    .section {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    .section h2 {
+      color: #333;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+
+    .section h3 {
+      color: #667eea;
+      margin: 1.5rem 0 1rem 0;
+      font-size: 1.3rem;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .demo-area {
+      border: 2px dashed #ddd;
+      padding: 2rem;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+
+    .demo-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+
+    .btn {
+      background: #667eea;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background: #5a67d8;
+    }
+
+    .btn.red {
+      background: #FF001E;
+    }
+
+    .btn.red:hover {
+      background: #e6001a;
+    }
+
+    .btn.green {
+      background: #48bb78;
+    }
+
+    .btn.green:hover {
+      background: #38a169;
+    }
+
+    .btn.orange {
+      background: #ed8936;
+    }
+
+    .btn.orange:hover {
+      background: #dd7324;
+    }
+
+    @media (max-width: 768px) {
+      .demo-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <h1>Примеры использования</h1>
+      <p class="subtitle">Рабочие примеры всех типов виджетов</p>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container">
+      <div class="nav-links">
+        <a href="index.html">Главная</a>
+        <a href="inline.html">Inline</a>
+        <a href="modal.html">Modal</a>
+        <a href="link.html">Link</a>
+        <a href="examples.html" class="active">Примеры</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <div class="section">
+        <h2>Inline виджеты</h2>
+        <p>Виджеты встроены прямо в контент страницы</p>
+
+        <div class="demo-grid">
+          <div class="demo-area">
+            <h3>Концерт Михаила Бублика</h3>
+            <div id="inline-widget-1"></div>
+          </div>
+
+          <div class="demo-area">
+            <h3>Другое событие</h3>
+            <live:widget data-client-id="123" data-type="inline" data-region-alias="moscow"
+              data-announcement-alias="posvyaschenie-muslimu-magomaevu-net-pesni-bez-tebya" data-event-id="27365059"
+              data-width="100%" data-height="500px">
+            </live:widget>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Modal виджеты</h2>
+        <p>Виджеты открываются в модальных окнах</p>
+
+        <div class="demo-buttons">
+          <button id="modal-1" class="btn">Стандартная кнопка</button>
+          <button id="modal-2" class="btn red">Красная кнопка</button>
+          <button id="modal-3" class="btn green">Зеленая кнопка</button>
+          <button id="modal-4" class="btn orange">Оранжевая кнопка</button>
+        </div>
+
+        <div class="demo-area">
+          <h3>HTML атрибуты</h3>
+          <live:widget data-client-id="123" data-type="modal" data-region-alias="moscow"
+            data-announcement-alias="posvyaschenie-muslimu-magomaevu-net-pesni-bez-tebya" data-event-id="27365059"
+            data-width="90%" data-height="90%" data-tag-name="button" class="btn">
+            Через HTML атрибуты
+          </live:widget>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Link виджеты</h2>
+        <p>Виджеты открываются в новых вкладках</p>
+
+        <div class="demo-buttons">
+          <button id="link-1" class="btn">Открыть в новой вкладке</button>
+          <button id="link-2" class="btn green">Другое событие</button>
+        </div>
+
+        <div class="demo-area">
+          <h3>HTML атрибуты</h3>
+          <live:widget data-client-id="123" data-type="link" data-region-alias="moscow"
+            data-announcement-alias="drug-na-chas-komediya" data-event-id="27105847" data-tag-name="button"
+            class="btn orange">
+            Через HTML атрибуты
+          </live:widget>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const rnd = '?' + new Date().getTime() * Math.random();
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://stg.live.mts.ru/scripts/widget-v1.iife.js' + rnd;
+      document.head.appendChild(script);
+    })();
+  </script>
+
+  <script>
+    window.addEventListener("load", () => {
+      // Inline widget
+      const inlineWidget = new window[Symbol.for("LiveNativeWidgetEmbed")]({
+        selector: "#inline-widget-1",
+        type: "inline",
+        width: "100%",
+        height: "500px",
+        regionAlias: "moscow",
+        announcementAlias: "mikhail-bublik-g-podolsk",
+        eventId: "26541557",
+        clientId: "123",
+      });
+      inlineWidget.create();
+
+      // Modal widgets
+      const modalWidget1 = new window[Symbol.for("LiveNativeWidgetEmbed")]({
+        selector: "#modal-1",
+        type: "modal",
+        width: "90%",
+        height: "90%",
+        regionAlias: "moscow",
+        announcementAlias: "mikhail-bublik-g-podolsk",
+        eventId: "26541557",
+        clientId: "123",
+      });
+      modalWidget1.create();
+
+      const modalWidget2 = new window[Symbol.for("LiveNativeWidgetEmbed")]({
+        selector: "#modal-2",
+        type: "modal",
+        width: "90%",
+        height: "90%",
+        regionAlias: "moscow",
+        announcementAlias: "posvyaschenie-muslimu-magomaevu-net-pesni-bez-tebya",
+        eventId: "27365059",
+        clientId: "123",
+      });
+      modalWidget2.create();
+
+      const modalWidget3 = new window[Symbol.for("LiveNativeWidgetEmbed")]({
+        selector: "#modal-3",
+        type: "modal",
+        width: "90%",
+        height: "90%",
+        regionAlias: "moscow",
+        announcementAlias: "drug-na-chas-komediya",
+        eventId: "27105847",
+        clientId: "123",
+      });
+      modalWidget3.create();
+
+      const modalWidget4 = new window[Symbol.for("LiveNativeWidgetEmbed")]({
+        selector: "#modal-4",
+        type: "modal",
+        width: "90%",
+        height: "90%",
+        regionAlias: "moscow",
+        announcementAlias: "mikhail-bublik-g-podolsk",
+        eventId: "26541557",
+        clientId: "123",
+        selectFrameByInstance: true
+      });
+      modalWidget4.create();
+
+      // Link widgets
+      const linkWidget1 = new window[Symbol.for("LiveNativeWidgetEmbed")]({
+        selector: "#link-1",
+        type: "link",
+        regionAlias: "moscow",
+        announcementAlias: "drug-na-chas-komediya",
+        eventId: "27105847",
+        clientId: "123",
+      });
+      linkWidget1.create();
+
+      const linkWidget2 = new window[Symbol.for("LiveNativeWidgetEmbed")]({
+        selector: "#link-2",
+        type: "link",
+        regionAlias: "moscow",
+        announcementAlias: "mikhail-bublik-g-podolsk",
+        eventId: "26541557",
+        clientId: "123",
+      });
+      linkWidget2.create();
+    });
+  </script>
+</body>
+
+</html>

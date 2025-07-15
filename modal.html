@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modal Widget - MTS Live</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f8f9fa;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    nav {
+      background: white;
+      padding: 1rem 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #666;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      background: #667eea;
+      color: white;
+    }
+
+    .nav-links a.active {
+      background: #667eea;
+      color: white;
+    }
+
+    main {
+      padding: 3rem 0;
+    }
+
+    .section {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    .section h2 {
+      color: #333;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+
+    .section h3 {
+      color: #667eea;
+      margin: 1.5rem 0 1rem 0;
+      font-size: 1.3rem;
+    }
+
+    .code-block {
+      background: #f4f4f4;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    .code-block code {
+      font-family: 'Monaco', 'Consolas', monospace;
+      font-size: 0.9rem;
+    }
+
+    .demo-area {
+      border: 2px dashed #ddd;
+      padding: 2rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      background: #fafafa;
+      text-align: center;
+    }
+
+    .param-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+
+    .param-table th,
+    .param-table td {
+      border: 1px solid #ddd;
+      padding: 0.8rem;
+      text-align: left;
+    }
+
+    .param-table th {
+      background: #f8f9fa;
+      font-weight: 600;
+    }
+
+    .btn {
+      background: #667eea;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #5a67d8;
+    }
+
+    .btn.secondary {
+      background: #FF001E;
+    }
+
+    .btn.secondary:hover {
+      background: #e6001a;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <h1>Modal Widget</h1>
+      <p class="subtitle">Открытие виджета в модальном окне</p>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container">
+      <div class="nav-links">
+        <a href="index.html">Главная</a>
+        <a href="inline.html">Inline</a>
+        <a href="modal.html" class="active">Modal</a>
+        <a href="link.html">Link</a>
+        <a href="examples.html">Примеры</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <div class="section">
+        <h2>Описание</h2>
+        <p>Modal виджет открывается в модальном окне поверх основного контента страницы. Активируется по клику на кнопку
+          или элемент.</p>
+
+        <h3>Преимущества:</h3>
+        <ul>
+          <li>Не занимает место на странице</li>
+          <li>Привлекает внимание пользователя</li>
+          <li>Может быть настроен на любой элемент</li>
+          <!-- <li>Поддерживает управление через URL параметры</li> -->
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Подключение скрипта</h2>
+        <div class="code-block">
+          <code>&lt;script&gt;
+  (function () {
+    const rnd = '?' + new Date().getTime() * Math.random();
+    const script = document.createElement('script');
+    const target = document.getElementsByTagName('script')[0];
+    script.async = true;
+    script.src = 'https://stg.live.mts.ru/scripts/widget-v1.iife.js' + rnd;
+    target.parentNode.insertBefore(script, target);
+  })();
+&lt;/script&gt;</code>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Способы использования</h2>
+
+        <h3>1. JavaScript API</h3>
+        <div class="code-block">
+          <code>&lt;button id="buy-tickets"&gt;Купить билеты&lt;/button&gt;
+
+&lt;script&gt;
+  window.addEventListener("load", () => {
+    const widget = new window[Symbol.for("LiveNativeWidgetEmbed")]({
+      selector: "#buy-tickets",
+      type: "modal",
+      width: "90%",
+      height: "90%",
+      regionAlias: "moscow",
+      announcementAlias: "mikhail-bublik-g-podolsk",
+      eventId: "26541557",
+      clientId: "your-client-id",
+    });
+    widget.create();
+  });
+&lt;/script&gt;</code>
+        </div>
+
+        <h3>2. HTML атрибуты</h3>
+        <h4>Вариант 1</h4>
+        <div class="code-block">
+          <code>&lt;live:widget 
+  data-client-id="your-client-id" 
+  data-type="modal" 
+  data-region-alias="moscow"
+  data-announcement-alias="mikhail-bublik-g-podolsk" 
+  data-event-id="26541557" 
+  data-width="90%" 
+  data-height="90%"
+  data-tag-name="button"
+  style="background:#FF001E;color:white;border:none;padding:8px 16px;"&gt;
+  Купить билеты
+&lt;/live:widget&gt;</code>
+        </div>
+        <h4>Вариант 2</h4>
+        <div class="code-block">
+          <code>&lt;script
+  type="text/html"
+  data-selector="live:widget"
+  data-client-id="your-client-id" 
+  data-type="modal" 
+  data-region-alias="moscow"
+  data-announcement-alias="mikhail-bublik-g-podolsk" 
+  data-event-id="26541557" 
+  data-width="90%" 
+  data-height="90%"
+  data-tag-name="button"
+  style="background:#FF001E;color:white;border:none;padding:8px 16px;"&gt;
+  Купить билеты
+&lt;/script&gt;</code>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Параметры</h2>
+        <table class="param-table">
+          <thead>
+            <tr>
+              <th>Параметр</th>
+              <th>Тип</th>
+              <th>Обязательный</th>
+              <th>Описание</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>selector</td>
+              <td>string</td>
+              <td>Да</td>
+              <td>CSS селектор или HTML Element кнопки/элемента</td>
+            </tr>
+            <tr>
+              <td>type</td>
+              <td>string</td>
+              <td>Да</td>
+              <td>Тип виджета: "modal"</td>
+            </tr>
+            <tr>
+              <td>width</td>
+              <td>string</td>
+              <td>Нет</td>
+              <td>Ширина виджета (по умолчанию: 100%)</td>
+            </tr>
+            <tr>
+              <td>height</td>
+              <td>string</td>
+              <td>Нет</td>
+              <td>Высота виджета (по умолчанию: 100%)</td>
+            </tr>
+            <tr>
+              <td>regionAlias</td>
+              <td>string</td>
+              <td>Да</td>
+              <td>Алиас региона</td>
+            </tr>
+            <tr>
+              <td>announcementAlias</td>
+              <td>string</td>
+              <td>Да</td>
+              <td>Алиас анонса</td>
+            </tr>
+            <tr>
+              <td>eventId</td>
+              <td>string</td>
+              <td>Да</td>
+              <td>ID события</td>
+            </tr>
+            <tr>
+              <td>clientId</td>
+              <td>string</td>
+              <td>Да</td>
+              <td>ID клиента</td>
+            </tr>
+            <tr>
+              <td>selectFrameByInstance</td>
+              <td>boolean</td>
+              <td>Нет</td>
+              <td>Уникальный iframe для каждого виджета</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section">
+        <h2>Демо</h2>
+        <h3>1. JavaScript API</h3>
+        <div class="demo-area">
+          <p>Нажмите на кнопки для открытия модального окна:</p>
+          <br>
+          <button id="demo-modal-1" class="btn">Стандартная кнопка</button>
+          <button id="demo-modal-2" class="btn secondary">Красная кнопка</button>
+        </div>
+        <h3>2. HTML атрибуты</h3>
+        <h4>Вариант 1</h4>
+        <div class="demo-area">
+          <p>Нажмите на кнопку для открытия модального окна:</p>
+          <br>
+          <live:widget data-client-id="123" data-type="modal" data-region-alias="moscow"
+            data-announcement-alias="posvyaschenie-muslimu-magomaevu-net-pesni-bez-tebya" data-event-id="27365059"
+            data-width="90%" data-height="90%" data-tag-name="button" id="demo-modal-3" class="btn">Стандартная кнопка
+          </live:widget>
+        </div>
+        <h4>Вариант 2</h4>
+        <div class="demo-area">
+          <p>Нажмите на кнопку для открытия модального окна:</p>
+          <br>
+          <script data-selector="live:widget" data-client-id="123" data-type="modal" data-region-alias="moscow"
+            data-announcement-alias="posvyaschenie-muslimu-magomaevu-net-pesni-bez-tebya" data-event-id="27365059"
+            data-width="90%" data-height="90%" data-tag-name="button" id="demo-modal-4" class="btn" type="text/html">Стандартная кнопка
+            </script>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const rnd = '?' + new Date().getTime() * Math.random();
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://stg.live.mts.ru/scripts/widget-v1.iife.js' + rnd;
+      document.head.appendChild(script);
+    })();
+  </script>
+
+  <script>
+    window.addEventListener("load", () => {
+      const widget1 = new window[Symbol.for("LiveNativeWidgetEmbed")]({
+        selector: "#demo-modal-1",
+        type: "modal",
+        width: "90%",
+        height: "90%",
+        regionAlias: "moscow",
+        announcementAlias: "mikhail-bublik-g-podolsk",
+        eventId: "26541557",
+        clientId: "123",
+      });
+      widget1.create();
+
+      const widget2 = new window[Symbol.for("LiveNativeWidgetEmbed")]({
+        selector: "#demo-modal-2",
+        type: "modal",
+        width: "90%",
+        height: "90%",
+        regionAlias: "moscow",
+        announcementAlias: "posvyaschenie-muslimu-magomaevu-net-pesni-bez-tebya",
+        eventId: "27365059",
+        clientId: "123",
+        selectFrameByInstance: true
+      });
+      widget2.create();
+    });
+  </script>
+</body>
+
+</html>
