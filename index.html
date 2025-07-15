@@ -297,20 +297,14 @@
     </div>
   </main>
 
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 MTS Live. Все права защищены.</p>
-    </div>
-  </footer>
-
   <!-- Prism.js JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-html.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-  
+
   <!-- Функциональность копирования -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       // Добавляем кнопки копирования ко всем блокам pre
       const preBlocks = document.querySelectorAll('pre');
       preBlocks.forEach(pre => {
@@ -318,15 +312,15 @@
         copyButton.className = 'copy-button';
         copyButton.textContent = 'Копировать';
         copyButton.setAttribute('aria-label', 'Копировать код');
-        
-        copyButton.addEventListener('click', function() {
+
+        copyButton.addEventListener('click', function () {
           const code = pre.querySelector('code');
           const text = code.textContent;
-          
+
           navigator.clipboard.writeText(text).then(() => {
             copyButton.textContent = 'Скопировано!';
             copyButton.classList.add('copied');
-            
+
             setTimeout(() => {
               copyButton.textContent = 'Копировать';
               copyButton.classList.remove('copied');
@@ -335,7 +329,7 @@
             console.error('Ошибка при копировании: ', err);
           });
         });
-        
+
         pre.appendChild(copyButton);
       });
     });
