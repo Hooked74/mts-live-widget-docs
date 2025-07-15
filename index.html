@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MTS Live Widget - Документация</title>
+  <!-- Prism.js CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
   <style>
     * {
       margin: 0;
@@ -175,6 +177,51 @@
       font-size: 0.9rem;
     }
 
+    /* Prism.js стили */
+    pre {
+      background: #f8f8f8 !important;
+      border: 1px solid #e1e8ed;
+      border-radius: 8px;
+      padding: 1rem !important;
+      margin: 1rem 0;
+      overflow-x: auto;
+      position: relative;
+    }
+
+    pre code {
+      font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Кнопка копирования */
+    .copy-button {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .copy-button:hover {
+      background: #5a67d8;
+    }
+
+    .copy-button.copied {
+      background: #28a745;
+    }
+
+    pre:hover .copy-button {
+      opacity: 1;
+    }
+
     footer {
       background: #333;
       color: white;
@@ -216,8 +263,7 @@
       <div class="installation">
         <h3>Подключение скрипта</h3>
         <p>Добавьте следующий код в ваш HTML:</p>
-        <div class="code-block">
-          <code>&lt;script&gt;
+        <pre><code class="language-html">&lt;script&gt;
   (function () {
     const rnd = '?' + new Date().getTime() * Math.random();
     const script = document.createElement('script');
@@ -226,8 +272,7 @@
     script.src = 'https://stg.live.mts.ru/scripts/widget-v1.iife.js' + rnd;
     target.parentNode.insertBefore(script, target);
   })();
-&lt;/script&gt;</code>
-        </div>
+&lt;/script&gt;</code></pre>
       </div>
 
       <div class="widget-cards">
@@ -257,6 +302,44 @@
       <p>&copy; 2025 MTS Live. Все права защищены.</p>
     </div>
   </footer>
+
+  <!-- Prism.js JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-html.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  
+  <!-- Функциональность копирования -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Добавляем кнопки копирования ко всем блокам pre
+      const preBlocks = document.querySelectorAll('pre');
+      preBlocks.forEach(pre => {
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-button';
+        copyButton.textContent = 'Копировать';
+        copyButton.setAttribute('aria-label', 'Копировать код');
+        
+        copyButton.addEventListener('click', function() {
+          const code = pre.querySelector('code');
+          const text = code.textContent;
+          
+          navigator.clipboard.writeText(text).then(() => {
+            copyButton.textContent = 'Скопировано!';
+            copyButton.classList.add('copied');
+            
+            setTimeout(() => {
+              copyButton.textContent = 'Копировать';
+              copyButton.classList.remove('copied');
+            }, 2000);
+          }).catch(err => {
+            console.error('Ошибка при копировании: ', err);
+          });
+        });
+        
+        pre.appendChild(copyButton);
+      });
+    });
+  </script>
 </body>
 
 </html>
